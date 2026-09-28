@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/SKIT.JsonConv.Shared/SKIT.JsonConv.Shared.shproj" Id="d77faaee-ad73-49e4-9ef7-7823cc53e6f5" />
+    <Project Path="src/SKIT.JsonConv.NewtonsoftJson/SKIT.JsonConv.NewtonsoftJson.csproj" />
+    <Project Path="src/SKIT.JsonConv.SystemTextJson/SKIT.JsonConv.SystemTextJson.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/SKIT.JsonConv.UnitTests/SKIT.JsonConv.UnitTests.csproj" Id="6fc4e71d-f4bb-4381-89e0-8b9ddfceba04" />
+  </Folder>
+</Solution>
