@@ -2,30 +2,30 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0; net6.0; net8.0; net10.0</TargetFrameworks>
-	</PropertyGroup>
+        <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+    </PropertyGroup>
 
-	<PropertyGroup>
-		<PackageId>SKIT.JsonConv.NewtonsoftJson</PackageId>
-		<PackageIcon>LOGO.png</PackageIcon>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageProjectUrl>https://github.com/fudiwei/DotNetCore.SKIT.JsonConv</PackageProjectUrl>
-		<PackageTags>SKIT; JSON; JSON Converter; Newtonsoft.Json</PackageTags>
-		<Version>0.1.0</Version>
-		<Description>为 Newtonsoft.Json 扩展更多的 JSON 转换器。</Description>
-		<Authors>Fu Diwei</Authors>
-		<RepositoryType>git</RepositoryType>
-		<RepositoryUrl>https://github.com/fudiwei/DotNetCore.SKIT.JsonConv.git</RepositoryUrl>
-	</PropertyGroup>
+    <PropertyGroup>
+        <PackageId>SKIT.JsonConv.NewtonsoftJson</PackageId>
+        <PackageIcon>LOGO.png</PackageIcon>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/fudiwei/DotNetCore.SKIT.JsonConv</PackageProjectUrl>
+        <PackageTags>SKIT; JSON; JSON Converter; Newtonsoft.Json</PackageTags>
+        <Version>0.1.0</Version>
+        <Description>为 Newtonsoft.Json 扩展更多的 JSON 转换器。</Description>
+        <Authors>Fu Diwei</Authors>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/fudiwei/DotNetCore.SKIT.JsonConv.git</RepositoryUrl>
+    </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
-		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-		<Deterministic>true</Deterministic>
-		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<IncludeSymbols>true</IncludeSymbols>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+        <Deterministic>true</Deterministic>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 
 	<ItemGroup>
