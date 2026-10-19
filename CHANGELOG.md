@@ -10,5 +10,8 @@
 
 ## SKIT.JsonConv.SystemTextJson
 
+- v0.1.1 (2026-10-19)
+    - **变更**：升级依赖 `System.Text.Json` 至 v10.0.13。
+
 - v0.1.0 (2026-09-28)
     - 首次发布。

@@ -12,7 +12,7 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/fudiwei/DotNetCore.SKIT.JsonConv</PackageProjectUrl>
 		<PackageTags>SKIT; JSON; JSON Converter; System.Text.Json</PackageTags>
-		<Version>0.1.0</Version>
+		<Version>0.1.1</Version>
 		<Description>为 System.Text.Json 扩展更多的 JSON 转换器。</Description>
 		<Authors>Fu Diwei</Authors>
 		<RepositoryType>git</RepositoryType>
