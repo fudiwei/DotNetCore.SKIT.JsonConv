@@ -34,8 +34,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.401" PrivateAssets="All" />
-		<PackageReference Include="System.Text.Json" Version="10.0.12" />
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.402" PrivateAssets="All" />
+		<PackageReference Include="System.Text.Json" Version="10.0.13" />
 	</ItemGroup>
 
 	<Import Project="..\SKIT.JsonConv.Shared\SKIT.JsonConv.Shared.projitems" Label="Shared" />
