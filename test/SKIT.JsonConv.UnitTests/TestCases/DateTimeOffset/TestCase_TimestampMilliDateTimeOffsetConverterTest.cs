@@ -5,21 +5,21 @@ namespace SKIT.JsonConv.UnitTests.TestCases
         private sealed class MockObject
         {
             [Newtonsoft.Json.JsonProperty(Order = 1)]
-            [Newtonsoft.Json.JsonConverter(typeof(SKIT.JsonConv.NewtonsoftJson.Converters.RFC3339DateTimeOffsetConverter))]
+            [Newtonsoft.Json.JsonConverter(typeof(SKIT.JsonConv.NewtonsoftJson.Converters.TimestampMilliDateTimeOffsetConverter))]
             [System.Text.Json.Serialization.JsonPropertyOrder(1)]
-            [System.Text.Json.Serialization.JsonConverter(typeof(SKIT.JsonConv.SystemTextJson.Converters.RFC3339DateTimeOffsetConverter))]
+            [System.Text.Json.Serialization.JsonConverter(typeof(SKIT.JsonConv.SystemTextJson.Converters.TimestampMilliDateTimeOffsetConverter))]
             public DateTimeOffset Property { get; set; }
 
             [Newtonsoft.Json.JsonProperty(Order = 2)]
-            [Newtonsoft.Json.JsonConverter(typeof(SKIT.JsonConv.NewtonsoftJson.Converters.RFC3339DateTimeOffsetConverter))]
+            [Newtonsoft.Json.JsonConverter(typeof(SKIT.JsonConv.NewtonsoftJson.Converters.TimestampMilliDateTimeOffsetConverter))]
             [System.Text.Json.Serialization.JsonPropertyOrder(2)]
-            [System.Text.Json.Serialization.JsonConverter(typeof(SKIT.JsonConv.SystemTextJson.Converters.RFC3339DateTimeOffsetConverter))]
+            [System.Text.Json.Serialization.JsonConverter(typeof(SKIT.JsonConv.SystemTextJson.Converters.TimestampMilliDateTimeOffsetConverter))]
             public DateTimeOffset? NullableProperty { get; set; }
         }
 
         private static void TestCustomJsonConverter(IJsonSerializer jsonSerializer)
         {
-            DateTimeOffset DATETIME = new DateTimeOffset(2006, 1, 2, 15, 4, 5, TimeSpan.FromHours(8));
+            DateTimeOffset DATETIME = new DateTimeOffset(2006, 1, 2, 15, 4, 5, 678, TimeSpan.FromHours(8));
 
             Assert.Multiple(() =>
             {
@@ -27,7 +27,7 @@ namespace SKIT.JsonConv.UnitTests.TestCases
                 var actualJson = jsonSerializer.Serialize(expectObj);
                 var actualObj = jsonSerializer.Deserialize<MockObject>(actualJson);
 
-                Assert.Equal("{\"Property\":\"2006-01-02T15:04:05+08:00\"}", actualJson);
+                Assert.Equal("{\"Property\":1136185445678}", actualJson);
 
                 Assert.Equal(expectObj.Property, actualObj.Property);
                 Assert.Equal(expectObj.NullableProperty, actualObj.NullableProperty);
@@ -39,7 +39,7 @@ namespace SKIT.JsonConv.UnitTests.TestCases
                 var actualJson = jsonSerializer.Serialize(expectObj);
                 var actualObj = jsonSerializer.Deserialize<MockObject>(actualJson);
 
-                Assert.Equal("{\"Property\":\"2006-01-02T15:04:05+08:00\",\"NullableProperty\":\"2006-01-02T15:04:05+08:00\"}", actualJson);
+                Assert.Equal("{\"Property\":1136185445678,\"NullableProperty\":1136185445678}", actualJson);
 
                 Assert.Equal(expectObj.Property, actualObj.Property);
                 Assert.Equal(expectObj.NullableProperty, actualObj.NullableProperty);

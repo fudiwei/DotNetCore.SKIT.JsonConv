@@ -49,7 +49,7 @@ namespace SKIT.JsonConv.UnitTests.TestCases
             });
         }
 
-        [Fact(DisplayName = "测试用例：自定义 Newtosoft.Json.JsonConverter 之 RegularDateOnlyConverter")]
+        [Fact(DisplayName = "测试用例：自定义 Newtosoft.Json.JsonConverter 之 ISO8601DateOnlyConverter")]
         public void TestNewtosoftJsonConverter()
         {
             var jsonSettings = NewtonsoftJsonSerializer.GetDefaultSerializerSettings();
@@ -59,7 +59,7 @@ namespace SKIT.JsonConv.UnitTests.TestCases
             TestCustomJsonConverter(new NewtonsoftJsonSerializer(jsonSettings));
         }
 
-        [Fact(DisplayName = "测试用例：自定义 System.Text.Json.Serialization.JsonConverter 之 RegularDateOnlyConverter")]
+        [Fact(DisplayName = "测试用例：自定义 System.Text.Json.Serialization.JsonConverter 之 ISO8601DateOnlyConverter")]
         public void TestSystemTextJsonConverter()
         {
             var jsonOptions = SystemTextJsonSerializer.GetDefaultSerializerOptions();
