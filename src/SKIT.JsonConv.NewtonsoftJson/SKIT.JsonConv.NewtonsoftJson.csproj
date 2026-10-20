@@ -1,32 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0; net6.0; net8.0; net10.0</TargetFrameworks>
-        <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
     </PropertyGroup>
 
     <PropertyGroup>
         <PackageId>SKIT.JsonConv.NewtonsoftJson</PackageId>
+        <PackageVersion>0.1.1</PackageVersion>
         <PackageIcon>LOGO.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/fudiwei/DotNetCore.SKIT.JsonConv</PackageProjectUrl>
         <PackageTags>SKIT; JSON; JSON Converter; Newtonsoft.Json</PackageTags>
-        <Version>0.1.1</Version>
-        <Description>为 Newtonsoft.Json 扩展更多的 JSON 转换器。</Description>
         <Authors>Fu Diwei</Authors>
-        <RepositoryType>git</RepositoryType>
-        <RepositoryUrl>https://github.com/fudiwei/DotNetCore.SKIT.JsonConv.git</RepositoryUrl>
+        <Description>为 Newtonsoft.Json 扩展更多的 JSON 转换器。</Description>
     </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-        <Deterministic>true</Deterministic>
-        <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-	</PropertyGroup>
 
 	<ItemGroup>
 		<None Include="../../LOGO.png" Pack="true" PackagePath="/" />
@@ -39,5 +26,4 @@
 	</ItemGroup>
 
 	<Import Project="..\SKIT.JsonConv.Shared\SKIT.JsonConv.Shared.projitems" Label="Shared" />
-
 </Project>
