@@ -2,6 +2,9 @@
 
 ## SKIT.JsonConv.NewtonsoftJson
 
+- v0.1.2 (2026-10-27)
+    - **修复**：修复 `StringifiedNumberListWithSplitConverter` 无法作用于 `System.Collections.Generic.List<Number>` 的问题。
+
 - v0.1.1 (2026-10-19)
     - **修复**：修复 `NewtonsoftJsonSerializerExtensions.ExtractSerializerSettings()` 无法提取错误事件处理器的问题。
 
