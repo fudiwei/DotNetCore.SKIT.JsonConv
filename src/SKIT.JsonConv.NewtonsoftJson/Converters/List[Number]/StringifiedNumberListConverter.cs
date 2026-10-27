@@ -52,14 +52,7 @@ namespace SKIT.JsonConv.NewtonsoftJson.Converters
 
         public override bool CanConvert(Type objectType)
         {
-            if (!objectType.IsGenericType)
-                return false;
-
-            if (!typeof(IList<>).IsAssignableFrom(objectType.GetGenericTypeDefinition()))
-                return false;
-
-            Type elementType = objectType.GetGenericArguments()[0];
-            return TypeHelper.IsNumberType(elementType);
+            return TypeHelper.IsListTypeOf(objectType, TypeHelper.IsNumberType);
         }
 
         public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)

@@ -94,14 +94,86 @@ namespace SKIT.JsonConv.Shared
         }
 
         /// <summary>
-        /// 验证 <see cref="Type"/> 是否是基元类型中表示数值的类型。
+        /// 验证类型是否是基元类型中表示数值的类型。
         /// 完整的数值类型清单见 <see cref="NumberTypes"/>。
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
         public static bool IsNumberType(Type type)
         {
+            if (type is null) throw new ArgumentNullException(nameof(type));
+
             return NumberTypes.Contains(type);
+        }
+
+        /// <summary>
+        /// 验证类型是否是一个数组类型、且每个数组元素都是指定类型。
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="elementType"></param>
+        /// <returns></returns>
+        public static bool IsArrayTypeOf(Type type, Type elementType)
+        {
+            if (type is null) throw new ArgumentNullException(nameof(type));
+            if (elementType is null) throw new ArgumentNullException(nameof(elementType));
+
+            return IsArrayTypeOf(type, t => elementType.IsAssignableFrom(t));
+        }
+
+        /// <summary>
+        /// 验证类型是否是一个数组类型、且每个数组元素都能满足条件。
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="elementTypePredicate"></param>
+        /// <returns></returns>
+        public static bool IsArrayTypeOf(Type type, Func<Type, bool> elementTypePredicate)
+        {
+            if (type is null) throw new ArgumentNullException(nameof(type));
+            if (elementTypePredicate is null) throw new ArgumentNullException(nameof(elementTypePredicate));
+
+            if (!type.IsArray)
+                return false;
+
+            Type elementType = type.GetElementType()!;
+            return elementTypePredicate(elementType);
+        }
+
+        /// <summary>
+        /// 验证类型是否是一个列表类型、且每个列表元素都是指定类型。
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="elementType"></param>
+        /// <returns></returns>
+        public static bool IsListTypeOf(Type type, Type elementType)
+        {
+            if (type is null) throw new ArgumentNullException(nameof(type));
+            if (elementType is null) throw new ArgumentNullException(nameof(elementType));
+
+            return IsListTypeOf(type, t => elementType.IsAssignableFrom(t));
+        }
+
+        /// <summary>
+        /// 验证类型是否是一个列表类型、且每个列表元素都能满足条件。
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="elementTypePredicate"></param>
+        /// <returns></returns>
+        public static bool IsListTypeOf(Type type, Func<Type, bool> elementTypePredicate)
+        {
+            if (type is null) throw new ArgumentNullException(nameof(type));
+            if (elementTypePredicate is null) throw new ArgumentNullException(nameof(elementTypePredicate));
+
+            if (!type.IsGenericType)
+                return false;
+
+            Type? listType = type.GetGenericTypeDefinition() == typeof(IList<>)
+                ? type
+                : Array.Find(type.GetInterfaces(), static intf => intf.IsGenericType && intf.GetGenericTypeDefinition() == typeof(IList<>));
+            if (listType is null)
+                return false;
+
+            Type elementType = listType.GetGenericArguments()[0];
+            return elementTypePredicate(elementType);
         }
 
         /// <summary>
@@ -112,12 +184,9 @@ namespace SKIT.JsonConv.Shared
         /// <returns></returns>
         public static IList ConvertNumberArrayToList(Array array, Type elementType)
         {
-            if (array is null)
-                throw new ArgumentNullException(nameof(array));
-            if (elementType is null)
-                throw new ArgumentNullException(nameof(elementType));
-            if (!IsNumberType(elementType))
-                throw new NotSupportedException();
+            if (array is null) throw new ArgumentNullException(nameof(array));
+            if (elementType is null) throw new ArgumentNullException(nameof(elementType));
+            if (!IsNumberType(elementType)) throw new NotSupportedException();
 
             return NumberType2ArrayLinqToListExpressionMap[elementType](array);
         }
@@ -130,12 +199,9 @@ namespace SKIT.JsonConv.Shared
         /// <returns></returns>
         public static Array ConvertNumberListToArray(IList list, Type elementType)
         {
-            if (list is null)
-                throw new ArgumentNullException(nameof(list));
-            if (elementType is null)
-                throw new ArgumentNullException(nameof(elementType));
-            if (!IsNumberType(elementType))
-                throw new NotSupportedException();
+            if (list is null) throw new ArgumentNullException(nameof(list));
+            if (elementType is null) throw new ArgumentNullException(nameof(elementType));
+            if (!IsNumberType(elementType)) throw new NotSupportedException();
 
             return NumberType2ListLinqToArrayExpressionMap[elementType](list);
         }
@@ -148,10 +214,8 @@ namespace SKIT.JsonConv.Shared
         /// <returns></returns>
         public static Array CreateNumberArray(Type elementType, int length = 0)
         {
-            if (elementType is null)
-                throw new ArgumentNullException(nameof(elementType));
-            if (!IsNumberType(elementType))
-                throw new NotSupportedException();
+            if (elementType is null) throw new ArgumentNullException(nameof(elementType));
+            if (!IsNumberType(elementType)) throw new NotSupportedException();
 
             return NumberType2ArrayConstructorExpressionMap[elementType](length);
         }
@@ -163,10 +227,8 @@ namespace SKIT.JsonConv.Shared
         /// <returns></returns>
         public static IList CreateNumberList(Type elementType)
         {
-            if (elementType is null)
-                throw new ArgumentNullException(nameof(elementType));
-            if (!IsNumberType(elementType))
-                throw new NotSupportedException();
+            if (elementType is null) throw new ArgumentNullException(nameof(elementType));
+            if (!IsNumberType(elementType)) throw new NotSupportedException();
 
             return NumberType2ListConstructorExpressionMap[elementType]();
         }

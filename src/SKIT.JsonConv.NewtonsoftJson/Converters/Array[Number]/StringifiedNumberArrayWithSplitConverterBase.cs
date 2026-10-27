@@ -48,11 +48,7 @@ namespace SKIT.JsonConv.NewtonsoftJson.Converters
 
         public override bool CanConvert(Type objectType)
         {
-            if (!objectType.IsArray)
-                return false;
-
-            Type elementType = objectType.GetElementType()!;
-            return TypeHelper.IsNumberType(elementType);
+            return TypeHelper.IsArrayTypeOf(objectType, TypeHelper.IsNumberType);
         }
 
         public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)

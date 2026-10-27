@@ -6,20 +6,25 @@ namespace SKIT.JsonConv.UnitTests.TestCases
         {
             [Newtonsoft.Json.JsonConverter(typeof(SKIT.JsonConv.NewtonsoftJson.Converters.StringifiedStringListWithSemicolonSplitConverter))]
             [System.Text.Json.Serialization.JsonConverter(typeof(SKIT.JsonConv.SystemTextJson.Converters.StringifiedStringListWithSemicolonSplitConverter))]
-            public IList<string>? Property { get; set; }
+            public List<string>? Property { get; set; }
+
+            [Newtonsoft.Json.JsonConverter(typeof(SKIT.JsonConv.NewtonsoftJson.Converters.StringifiedStringListWithSemicolonSplitConverter))]
+            [System.Text.Json.Serialization.JsonConverter(typeof(SKIT.JsonConv.SystemTextJson.Converters.StringifiedStringListWithSemicolonSplitConverter))]
+            public IList<string>? PropertyI { get; set; }
         }
 
         private static void TestCustomJsonConverter(IJsonSerializer jsonSerializer)
         {
             Assert.Multiple(() =>
             {
-                var expectObj = new MockObject() { Property = new List<string>() { "a", "b", "c" } };
+                var expectObj = new MockObject() { Property = new List<string>() { "a", "b", "c" }, PropertyI = new List<string>() { "a", "b", "c" } };
                 var actualJson = jsonSerializer.Serialize(expectObj);
                 var actualObj = jsonSerializer.Deserialize<MockObject>(actualJson);
 
-                Assert.Equal("{\"Property\":\"a;b;c\"}", actualJson);
+                Assert.Equal("{\"Property\":\"a;b;c\",\"PropertyI\":\"a;b;c\"}", actualJson);
 
                 Assert.Equal(expectObj.Property, actualObj.Property);
+                Assert.Equal(expectObj.PropertyI, actualObj.PropertyI);
             });
         }
 

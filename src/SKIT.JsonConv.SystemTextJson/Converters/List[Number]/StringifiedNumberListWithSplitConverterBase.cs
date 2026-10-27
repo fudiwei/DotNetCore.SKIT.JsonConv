@@ -33,14 +33,7 @@ namespace SKIT.JsonConv.SystemTextJson.Converters
 
         public override bool CanConvert(Type typeToConvert)
         {
-            if (!typeToConvert.IsGenericType)
-                return false;
-
-            if (!typeof(IList<>).IsAssignableFrom(typeToConvert.GetGenericTypeDefinition()))
-                return false;
-
-            Type elementType = typeToConvert.GetGenericArguments()[0];
-            return TypeHelper.IsNumberType(elementType);
+            return TypeHelper.IsListTypeOf(typeToConvert, TypeHelper.IsNumberType);
         }
 
         public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)

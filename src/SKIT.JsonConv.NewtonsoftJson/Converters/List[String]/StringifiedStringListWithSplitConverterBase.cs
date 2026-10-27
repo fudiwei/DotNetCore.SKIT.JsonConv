@@ -22,8 +22,7 @@ namespace SKIT.JsonConv.NewtonsoftJson.Converters
 
         public override bool CanConvert(Type objectType)
         {
-            return objectType.IsGenericType &&
-                   typeof(IList<>).IsAssignableFrom(objectType.GetGenericTypeDefinition()) &&
+            return TypeHelper.IsListTypeOf(objectType, typeof(string)) &&
                    typeof(string) == objectType.GetGenericArguments()[0];
         }
 
@@ -73,7 +72,7 @@ namespace SKIT.JsonConv.NewtonsoftJson.Converters
 
             public override IList<string>? ReadJson(JsonReader reader, Type objectType, IList<string>? existingValue, bool hasExistingValue, JsonSerializer serializer)
             {
-                return _converter.ReadJson(reader, typeof(string[]), existingValue?.ToArray(), hasExistingValue, serializer);
+                return _converter.ReadJson(reader, typeof(string[]), existingValue?.ToArray(), hasExistingValue, serializer)?.ToList();
             }
 
             public override void WriteJson(JsonWriter writer, IList<string>? value, JsonSerializer serializer)
